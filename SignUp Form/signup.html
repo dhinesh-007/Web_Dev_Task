@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: white;
+            text-align: left;
+        }
+
+        .container {
+            color: white;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #0c0c0c;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-left: 30%;
+            vertical-align: middle;
+            margin-top: 20%;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 5px;
+            margin-top: 2px;
+            border: 1px solid #0fbde9;
+            border-radius: 14px;
+        }
+
+        button {
+            background-color: #f00;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3b3b39;
+        }
+
+        .error {
+            color: #FF0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Sign Up</h2>
+        <form id="signup-form">
+            <div class="form-group">
+                <label for="email">User Email:</label><br>
+                <input type="text" id="email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password">
+            </div>
+            <button type="button" id="signup-btn">Sign Up</button>
+        </form>
+        <p id="error-message" class="error"></p>
+    </div>
+
+    <script>
+        document.getElementById('signup-btn').addEventListener('click', function() {
+            // Get user input values
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+            // Regular expressions for email and password validation
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            // Check email and password validity
+            if (!emailRegex.test(email)) {
+                showError("Invalid email address");
+            } else if (!passwordRegex.test(password)) {
+                showError("Invalid password. Password must have at least 8 characters, one uppercase letter, one special character, and one number.");
+            } else {
+                showSuccess();
+            }
+        });
+
+        function showError(message) {
+            var errorMessage = document.getElementById('error-message');
+            errorMessage.textContent = message;
+        }
+
+        function showSuccess() {
+            var errorMessage = document.getElementById('error-message');
+            errorMessage.textContent = "Successful";
+            errorMessage.style.color = "green";
+        }
+    </script>
+</body>
+</html>
